@@ -1,26 +1,74 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import CodeDisplay from './components/CodeDisplay';
+import MessagesDisplay from './components/MessagesDisplay';
 
-function App() {
+interface ChatData {
+  role: string;
+  content: string;
+}
+
+const App = () => {
+  const [chatData, setChatData] = useState<ChatData[]>([]);
+  const [userInputValue, setUserInputValue] = useState<string>('');
+
+  const getQuery = async () => {
+    try {
+      const options: RequestInit = {
+        method: 'POST',
+        body: JSON.stringify({ message: userInputValue }),
+        headers: {
+          'content-type': 'application/json',
+        },
+      };
+
+      const response = await fetch(
+        'http://localhost:6969/completions',
+        options
+      );
+      const data = await response.json();
+      console.log(data);
+      const userMessage = {
+        role: 'user',
+        content: userInputValue,
+      };
+      setChatData((prevChatData) => [...prevChatData, data, userMessage]);
+    } catch (error) {
+      console.error('Scheisse our frontend is kaput: ', error);
+    }
+  };
+
+  const userMessages = chatData.filter(({ role }) => role === 'user');
+  const codeToDisplay = chatData
+    .filter(({ role }) => role === 'assistant')
+    .pop();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div className="app">
+      <MessagesDisplay messages={userMessages} />
+      <input
+        value={userInputValue}
+        onChange={(e) => setUserInputValue(e.target.value)}
+      />
+      <CodeDisplay codeToDisplay={codeToDisplay?.content || ''} />
+      <div className="button-container">
+        <button
+          id="get-query"
+          onClick={getQuery}
         >
-          Learn React
-        </a>
-      </header>
+          Get Query
+        </button>
+        <button
+          onClick={() => {
+            setChatData([]);
+            setUserInputValue('');
+          }}
+          id="clear-chat"
+        >
+          Clear Chat
+        </button>
+      </div>
     </div>
   );
-}
+};
 
 export default App;
