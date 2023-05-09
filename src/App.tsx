@@ -25,8 +25,9 @@ const App = () => {
         'http://localhost:6969/completions',
         options
       );
+
       const data = await response.json();
-      console.log(data);
+
       const userMessage = {
         role: 'user',
         content: userInputValue,
