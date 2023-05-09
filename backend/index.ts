@@ -5,8 +5,8 @@ import * as dotenv from 'dotenv'
 
 dotenv.config()
 
-const PORT: number = 6969
-
+const PORT = process.env.PORT || 6969
+ 
 const app: Application = express()
 
 app.use(cors())
