@@ -16,6 +16,12 @@ const API_KEY = process.env.API_KEY
 const config = new Configuration({apiKey: API_KEY})
 const openAiApi = new OpenAIApi(config)
 
+app.all('/', (req, res) => {
+    console.log("Just got a request!")
+    
+    res.send('Yo! this is your api key' + API_KEY)
+})
+
 app.post("/completions",async (req, res) => {
     try {
         const completion = await openAiApi.createChatCompletion({
