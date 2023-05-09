@@ -1,4 +1,4 @@
-import express, {Application, Request, Response} from 'express'
+import express from 'express'
 import cors from 'cors'
 import { OpenAIApi, Configuration } from 'openai'
 import * as dotenv from 'dotenv'
@@ -7,16 +7,16 @@ dotenv.config()
 
 const PORT = process.env.PORT || 6969
  
-const app: Application = express()
+const app = express()
 
 app.use(cors())
 app.use(express.json())
 
-const API_KEY: string = process.env.API_KEY!
+const API_KEY = process.env.API_KEY
 const config = new Configuration({apiKey: API_KEY})
 const openAiApi = new OpenAIApi(config)
 
-app.post("/completions",async (req: Request, res: Response) => {
+app.post("/completions",async (req, res) => {
     try {
         const completion = await openAiApi.createChatCompletion({
             model: 'gpt-4',

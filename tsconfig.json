@@ -22,5 +22,5 @@
   },
   "include": [
     "src"
-, "backend/index.ts"  ]
+, "backend/index.js"  ]
 }
