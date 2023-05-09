@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/sql-generator-gpt/static/css/main.9a79847e.css",
+    "main.js": "/sql-generator-gpt/static/js/main.5c85f0fc.js",
+    "index.html": "/sql-generator-gpt/index.html",
+    "main.9a79847e.css.map": "/sql-generator-gpt/static/css/main.9a79847e.css.map",
+    "main.5c85f0fc.js.map": "/sql-generator-gpt/static/js/main.5c85f0fc.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9a79847e.css",
+    "static/js/main.5c85f0fc.js"
+  ]
+}
