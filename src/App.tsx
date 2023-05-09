@@ -22,7 +22,7 @@ const App = () => {
       };
 
       const response = await fetch(
-        'http://localhost:6969/completions',
+        'https://sql-generator-backend.cyclic.app/completions',
         options
       );
 
