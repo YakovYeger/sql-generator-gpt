@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "homepage": "https://YakovYeger.github.io/sql-generator-gpt",
   "dependencies": {
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "13.4.0",
@@ -14,6 +15,7 @@
     "cors": "2.8.5",
     "dotenv": "16.0.3",
     "express": "4.18.2",
+    "gh-pages": "5.0.0",
     "openai": "3.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -25,6 +27,8 @@
   "scripts": {
     "start:frontend": "react-scripts start",
     "start:backend": "ts-node --esm index.ts",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
